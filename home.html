@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kent Tour app</title>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link href='bootstrap.css' rel='stylesheet' type='text/css' />
+
+		<!-- Map assets -->
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.css" />
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/font-awesome/css/font-awesome.min.css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.css" />
+
+
+		<style>
+
+
+
+			body, h2 {
+				font-family: arial;
+			}
+
+			h2 {font-size: 1.5em}
+
+			header {
+				background-color: #041d5d;
+				padding:10px;
+			}
+			header h1 {
+				font-size:2em; 
+				color:#fff;
+				margin-top:0px;
+
+				margin-bottom:0px;
+			}
+
+			#map {height:300px;width:100%;}
+
+			.fa {}
+
+			.nearby .row {
+				border-top: solid 1px;
+				border-bottom: solid 1px;
+				margin-top:2px;
+			}
+			.nearby .row .fa {
+				font-size:2.5em; 
+				margin-top:14px;
+			}
+
+
+
+
+
+		</style>
+
+
+
+<style>
+
+a {
+  border-bottom: 1px solid #DDDDDD;
+  color: #1F4F82;
+  text-decoration: none;
+}
+
+
+
+a:hover {
+  border-bottom: 1px solid #1F4F82;
+  color: #1F4F82;
+  text-decoration: none;
+}
+
+
+
+
+ul.link-list li a:hover {
+  background:  #FFFFFF;
+}
+
+
+
+ul.link-list.key-links {
+  margin-top: 0;
+}
+
+ul.link-list {
+  background: none repeat scroll 0 0 #F4F4F4;
+  margin: 1em 0 1.5em;
+  padding: 0;
+}
+
+
+ul.link-list li:first-child {
+  border-top: 1px solid #E5E5E5;
+}
+
+
+ul.link-list li {
+  border-bottom: 1px solid #E5E5E5;
+  display: block;
+  list-style: none outside none;
+}
+
+
+li {
+  line-height: 20px;
+}
+
+
+
+
+ul.link-list li a {
+  
+  border-bottom: 0 none;
+  display: block;
+  font-size: 1.2em;
+  padding-bottom: 0.9em;
+  padding-left: 1.5em;
+  padding-top: 0.9em;
+  position: relative;
+}
+
+
+
+ul.link-list li a i.ico {
+  font-size: 1em;
+  position: absolute;
+  right: 5%;
+  top: 38%;
+}
+
+
+
+
+.intro-screen {
+	width: 100%;
+}
+
+
+
+.app-heading {
+ position: relative;
+ padding: 3em 0 2em 0 ;
+ margin-top: 2em;
+}
+
+
+
+.app-heading h1 {
+ position: absolute;
+ background: #081d45;
+ padding: 1em;
+ text-transform: uppercase;
+ font-family: times;
+ width: 75%;
+ top: -1em;
+ color: #fff;
+ font-size: 1.7em;
+}
+
+.app-heading h1 span {
+	color: #937227;
+}
+
+
+</style>
+
+	</head>
+	<body>
+	
+	
+
+
+<header class="kent-branding">
+
+<img src="images/kent-logo.png" width="200em"/>
+
+
+</header>
+
+
+	<div class='container-fluid'>
+
+
+
+
+		<div class='row'>
+			<div class='col-12-sm app-heading'>
+				
+
+
+
+		<img src="images/explore.jpg" class="intro-screen"  />
+		
+		
+
+
+		<h1>Experience Kent <span>/ Self tour guide</span></h1>
+
+
+
+			</div>
+		</div>
+
+		<div class='nearby'>
+
+<h2>Explore:</h2>
+
+
+<ul class="link-list key-links">
+					<li><a href="https://live.kent.ac.uk" class="ico-email">Canterbury <i class="ico icon-chevron-right"></i></a></li>
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Medway <i class="ico icon-chevron-right"></i></a></li>
+
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Tonbridge <i class="ico icon-chevron-right"></i></a></li>
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Paris <i class="ico icon-chevron-right"></i></a></li>
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Brussels <i class="ico icon-chevron-right"></i></a></li>
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Rome <i class="ico icon-chevron-right"></i></a></li>
+					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Athens <i class="ico icon-chevron-right"></i></a></li>
+					
+				</ul>
+
+
+
+
+		</div>
+
+	 </div> 
+
+
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/jquery/jquery.min.js"></script>
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.js"></script>
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.js"></script>
+	<script>
+		// get the tiles
+		var tiles =  L.tileLayer('http://maptiles.kent.ac.uk/tiles/{z}/{x}/{y}.png');
+
+		// define the map
+		var map = L.map('map',{
+			layers: [ tiles ],
+			zoom: 16,
+			maxBounds: new L.LatLngBounds(new L.LatLng(90, -200), new L.LatLng(-90, 200))
+		});
+
+		// Geo locate
+		map.locate({
+			watch: true,
+			setView: true
+		});
+
+		// On error, send em somewhere else
+		map.on('locationerror', function() {
+        	map.panTo([51.29225, 1.06599]);         
+    	});
+		
+		// Add layers
+		var poi = new L.LayerGroup().addTo(map);
+		var tours = new L.LayerGroup().addTo(map);
+
+
+		$.ajax({
+	        type: 'GET',
+	        url: "geo.json",
+	        contentType: "application/json",
+	       // dataType: 'jsonp',
+	       // jsonp: 'jsonp',
+	        success: function(data){
+
+				// display geojson data as a map layer
+				L.geoJson(data, {
+
+					pointToLayer: function (feature, latlng) {
+
+						console.log("point!");
+						console.log(latlng);
+						return L.marker(latlng,  
+						{
+							icon: L.AwesomeMarkers.icon(
+								{icon: 'map-marker', markerColor: 'blue', 'prefix': 'fa'}
+							) 
+						});
+
+				    }
+
+				}).addTo(poi);
+			}
+		});
+
+	</script>
+	</body>
+</html>
