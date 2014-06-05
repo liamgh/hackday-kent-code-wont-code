@@ -100,64 +100,101 @@
 	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.js"></script>
 	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.js"></script>
 	<script>
-		// get the tiles
-		var tiles =  L.tileLayer('http://maptiles.kent.ac.uk/tiles/{z}/{x}/{y}.png');
 
-		// define the map
-		var map = L.map('map',{
-			layers: [ tiles ],
-			zoom: 16,
-			maxBounds: new L.LatLngBounds(new L.LatLng(90, -200), new L.LatLng(-90, 200))
-		});
+		var tourMap = new function(){
 
-		// Geo locate
-		map.locate({
-			watch: true,
-			setView: true
-		});
+			var here = this;
 
-		// On error, send em somewhere else
-		map.on('locationerror', function() {
-        	map.panTo([51.29225, 1.06599]);         
-    	});
-		
-		// Add layers
-		var poi = new L.LayerGroup().addTo(map);
-		var tours = new L.LayerGroup().addTo(map);
+			this.data = [];
 
+			// get the tiles
+			this.tiles =  L.tileLayer('http://maptiles.kent.ac.uk/tiles/{z}/{x}/{y}.png');
 
-		$.ajax({
-	        type: 'GET',
-	        url: "geo.json",
-	        contentType: "application/json",
-	       // dataType: 'jsonp',
-	       // jsonp: 'jsonp',
-	        success: function(data){
+			// define the map
+			this.map = L.map('map',{
+				layers: [ this.tiles ],
+				zoom: 16,
+				maxBounds: new L.LatLngBounds(new L.LatLng(90, -200), new L.LatLng(-90, 200))
+			});
+			// Add layers
+			this.layers = {
+				'poi': new L.LayerGroup().addTo(this.map),
+				'tours': new L.LayerGroup().addTo(this.map)	
+			} 
 
-				// display geojson data as a map layer
-				L.geoJson(data, {
+			// Geo locate
+			this.map.locate({
+				watch: true,
+				setView: true
+			});
 
-					pointToLayer: function (feature, latlng) {
+			// On error, send em somewhere else
+			this.map.on('locationerror', function() {
+	        	map.panTo([51.29225, 1.06599]);         
+	    	});
 
-						console.log("point!");
-						console.log(latlng);
-						return L.marker(latlng,  
-						{
-							icon: L.AwesomeMarkers.icon(
-								{icon: 'map-marker', markerColor: 'blue', 'prefix': 'fa'}
-							) 
-						});
+			// Load in GeoJson data
+	    	this.load = function(){
 
-				    },
-				    onEachFeature: function (feature, marker){
+	    		$.ajax({
+			        type: 'GET',
+			        url: "geo.json",
+			        contentType: "application/json",
+			       // dataType: 'jsonp',
+			       // jsonp: 'jsonp',
+			        success: function(data){
 
-						var text = '<h3>'+feature.properties.name +'</h3><p>'+feature.properties.popupContent+'</p>';
+			        	here.data = data;
+						// display geojson data as a map layer
+						L.geoJson(data, {
+							pointToLayer: function (feature, latlng) {
+								return L.marker(latlng,  
+								{
+									icon: L.AwesomeMarkers.icon(
+										{icon: 'map-marker', markerColor: 'blue', 'prefix': 'fa'}
+									) 
+								});
 
-					 	marker.bindPopup(text);
+						    },
+						    onEachFeature: function (feature, marker){
+
+								var text = '<h3>'+feature.properties.name +'</h3><p>'+feature.properties.description+'</p>';
+
+							 	marker.bindPopup(text);
+							}
+						}).addTo(here.layers.poi);
 					}
-				}).addTo(poi);
-			}
-		});
+				});	
+	    	}
+	    	// on location update (i think)
+			this.map.on('locationfound', function(location) {
+				console.log("Location update");
+	        	here.update_distances(location, here.data);
+	        	// update DOM with reordered lists
+	    	});
+
+	    	this.update_distances = function(user_latlng, data){
+
+	    		for(var i in data.features){
+	    			var feature = data.features[i];
+
+	    			feature._distance = distance(
+	    				user_latlng.longitude,
+	    				user_latlng.latitude,
+	    				feature.geometry.coordinates[0],
+	    				feature.geometry.coordinates[1]
+	    			);
+	    			console.log(feature);
+	    		}
+
+	    	}
+		}
+		// Load data
+		tourMap.load();
+		
+
+
+		
 
 		// http://stackoverflow.com/questions/27928/how-do-i-calculate-distance-between-two-latitude-longitude-points
 		function distance(lat1, lon1, lat2, lon2) {
@@ -168,6 +205,11 @@
 		     (1 - Math.cos((lon2 - lon1) * Math.PI / 180))/2;
 
 		  return R * 2 * Math.asin(Math.sqrt(a));
+		}
+
+		function refreshNearBy(){
+
+
 		}
 
 

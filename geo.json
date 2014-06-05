@@ -1,11 +1,5 @@
 { "type": "FeatureCollection",
-    "features": [
+    "features": [{ "_id" : "1", "type" : "Feature", "properties" : { "name" : "Senate", "description" : null, "audioFile" : "", "descripion" : "The Senate Building." }, "geometry" : { "type" : "Point", "coordinates" : [ "1.0696751", "51.2971789" ] } },{ "_id" : "2", "type" : "Feature", "properties" : { "name" : "Templeman Library", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.0694", "51.29743" ] } },{ "_id" : "3", "type" : "Feature", "properties" : { "name" : "Marlowe", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.06785", "51.29681" ] } },{ "_id" : "4", "type" : "Feature", "properties" : { "name" : "Elliot", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.0687", "51.29607" ] } },{ "_id" : "5", "type" : "Feature", "properties" : { "name" : "Rutherford", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.07124", "51.29731" ] } },{ "_id" : "6", "type" : "Feature", "properties" : { "name" : "Cornwallis South", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.07024", "51.29841" ] } },{ "_id" : "7", "type" : "Feature", "properties" : { "name" : "Gulbenkian", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.06978", "51.29826" ] } },{ "_id" : "8", "type" : "Feature", "properties" : { "name" : "Colyer-Fergusson", "description" : null, "audioFile" : "", "descripion" : "" }, "geometry" : { "type" : "Point", "coordinates" : [ "1.06945", "51.29867" ] } }]
 
-      { "_id" : "1",
-       "type" : "Feature",
-        "properties" : { "name" : "Senate", "amenity" : "Building", "popupContent" : "Where the innovation event happened!" },
-         "geometry" : { "type" : "Point", "coordinates" : [ "1.0696751", "51.2971789" ] } 
-       }
-    ]
 
 }
