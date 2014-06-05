@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kent Tour app</title>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link href='bootstrap.css' rel='stylesheet' type='text/css' />
+
+		<!-- Map assets -->
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.css" />
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.css" />
+
+
+		<style>
+			header {
+				background-color: #041d5d;
+				padding:10px;
+			}
+			header h1 {
+				font-size:2em; 
+				color:#fff;
+				margin-top:0px;
+
+				margin-bottom:0px;
+			}
+
+			#map {height:300px;width:100%;}
+
+			.fa {}
+
+			.nearby .row {
+				border-top: solid 1px;
+				border-bottom: solid 1px;
+				margin-top:2px;
+			}
+			.nearby .row .fa {
+				font-size:2.5em; 
+				margin-top:14px;
+			}
+		</style>
+	</head>
+	<body>
+	
+	<div class='container-fluid'>
+	<header class='row'>
+			<h1>Experience Kent</h1>
+		</header>
+
+		<div class='row'>
+			<div class='col-12-sm'>
+				<div  id='map'></div>
+			</div>
+		</div>
+
+		<div class='nearby'>
+
+			<div class='row'>
+				<div class='col-xs-10'>
+					<h4>Somthing Building</h4>
+					<span>Short description... </span>
+				</div>
+				<div class='col-xs-2'>
+					<i class="fa fa-play"></i>
+				</div>
+			</div>
+
+			<div class='row'>
+				<div class='col-xs-10'>
+					<h4>Somthing Building</h4>
+					<span>Short description... </span>
+				</div>
+				<div class='col-xs-2'>
+					<i class="fa fa-play"></i>
+				</div>
+			</div>
+
+			<div class='row'>
+				<div class='col-xs-10'>
+					<h4>Somthing Building</h4>
+					<span>Short description... </span>
+				</div>
+				<div class='col-xs-2'>
+					<i class="fa fa-play"></i>
+				</div>
+			</div>
+
+		</div>
+
+	 </div> 
+
+
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/jquery/jquery.min.js"></script>
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.js"></script>
+	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.js"></script>
+	<script>
+		// get the tiles
+		var tiles =  L.tileLayer('http://maptiles.kent.ac.uk/tiles/{z}/{x}/{y}.png');
+
+		// define the map
+		var map = L.map('map',{
+			layers: [ tiles ],
+			zoom: 16,
+			maxBounds: new L.LatLngBounds(new L.LatLng(90, -200), new L.LatLng(-90, 200))
+		});
+
+		// Geo locate
+		map.locate({
+			watch: true,
+			setView: true
+		});
+
+		// On error, send em somewhere else
+		map.on('locationerror', function() {
+        	map.panTo([51.29225, 1.06599]);         
+    	});
+		
+		// Add layers
+		var poi = new L.LayerGroup().addTo(map);
+		var tours = new L.LayerGroup().addTo(map);
+
+
+		$.ajax({
+	        type: 'GET',
+	        url: "geo.json",
+	        contentType: "application/json",
+	       // dataType: 'jsonp',
+	       // jsonp: 'jsonp',
+	        success: function(data){
+
+				// display geojson data as a map layer
+				L.geoJson(data, {
+
+					pointToLayer: function (feature, latlng) {
+
+						console.log("point!");
+						console.log(latlng);
+						return L.marker(latlng,  
+						{
+							icon: L.AwesomeMarkers.icon(
+								{icon: 'map-marker', markerColor: 'blue', 'prefix': 'fa'}
+							) 
+						});
+
+				    }
+
+				}).addTo(poi);
+			}
+		});
+
+	</script>
+	</body>
+</html>
