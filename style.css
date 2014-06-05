@@ -1,0 +1,156 @@
+
+			body, h2 {
+				font-family: arial;
+			}
+
+			h2 {font-size: 1.5em}
+
+			header {
+				background-color: #041d5d;
+				padding:10px;
+			}
+			header h1 {
+				font-size:2em; 
+				color:#fff;
+				margin-top:0px;
+
+				margin-bottom:0px;
+			}
+
+			#map {height:300px;width:100%;}
+
+			.fa {}
+
+			.nearby .row {
+				border-top: solid 1px;
+				border-bottom: solid 1px;
+				margin-top:2px;
+			}
+			.nearby .row .fa {
+				font-size:2.5em; 
+				margin-top:14px;
+			}
+
+
+
+
+
+
+a {
+  border-bottom: 1px solid #DDDDDD;
+  color: #1F4F82;
+  text-decoration: none;
+}
+
+
+
+a:hover {
+  border-bottom: 1px solid #1F4F82;
+  color: #1F4F82;
+  text-decoration: none;
+}
+
+
+
+
+ul.link-list li a:hover {
+  background:  #FFFFFF;
+}
+
+
+
+ul.link-list.key-links {
+  margin-top: 0;
+}
+
+ul.link-list {
+  background: none repeat scroll 0 0 #F4F4F4;
+  margin: 1em 0 1.5em;
+  padding: 0;
+}
+
+
+ul.link-list li:first-child {
+  border-top: 1px solid #E5E5E5;
+}
+
+
+ul.link-list li {
+  border-bottom: 1px solid #E5E5E5;
+  display: block;
+  list-style: none outside none;
+}
+
+
+li {
+  line-height: 20px;
+}
+
+
+
+
+ul.link-list li a {
+  
+  border-bottom: 0 none;
+  display: block;
+  font-size: 1.2em;
+  padding-bottom: 0.9em;
+  padding-left: 1.5em;
+  padding-top: 0.9em;
+  position: relative;
+}
+
+
+
+ul.link-list li a i.ico {
+  font-size: 1em;
+  position: absolute;
+  right: 5%;
+  top: 38%;
+}
+
+
+
+
+.intro-screen {
+	width: 100%;
+}
+
+
+
+.app-heading {
+ position: relative;
+ padding: 3em 0 2em 0 ;
+ margin-top: 2em;
+}
+
+
+
+.app-heading h1 {
+ position: absolute;
+ background: #081d45;
+ padding: 1em;
+ text-transform: uppercase;
+ font-family: times;
+ width: 75%;
+ top: -1em;
+ color: #fff;
+ font-size: 1.7em;
+}
+
+.app-heading h1 span {
+	color: #937227;
+}
+
+
+
+header.kent-branding {
+ background: #fff;
+ height: 2em;
+margin-bottom: 1.1em;
+}
+
+
+header.kent-branding img {
+ float: right; 
+}
