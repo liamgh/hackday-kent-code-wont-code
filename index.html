@@ -97,7 +97,7 @@
 
 		<div class="result-options">
 			<h2>Nearby you:</h2>
-			<a class="route" href="#">Give me a guided route</a>
+			<a class="route" href="#" id='show_tour'>Give me a guided route</a>
 		</div>
 
 
@@ -272,12 +272,26 @@ Video
 	    	this.renderNearBy = function(data){
 	    		// render top 3 or so items
 	    	}
+
+	    	this.showTour= function (tour_name){
+	    		$.ajax({
+			        type: 'GET',
+			        url: tour_name+".json",
+			        contentType: "application/json",
+			        success: function(data){
+			         	L.geoJson(data, {}).addTo(here.layers.tours);
+			        }
+			    });
+
+	    	}
 		}
 		// Load data
 		tourMap.load();
 		
 
-
+		$("#show_tour").click(function(){
+			tourMap.showTour("central_tour");
+		});
 		
 
 		// http://stackoverflow.com/questions/27928/how-do-i-calculate-distance-between-two-latitude-longitude-points
