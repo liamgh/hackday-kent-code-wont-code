@@ -227,6 +227,11 @@ padding: 0.5em;
 	position: relative;
 }
 
+
+.poi-img {
+	float: left; margin-right: 1em; width: 33%
+}
+
 .close-icon {
 	position: absolute;
 	top:0em;
@@ -234,4 +239,6 @@ padding: 0.5em;
 }
 
 
-
+.clear {
+	clear: both;
+}
