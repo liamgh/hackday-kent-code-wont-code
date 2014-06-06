@@ -295,10 +295,13 @@ Video
 			        url: tour_name+".json",
 			        contentType: "application/json",
 			        success: function(data){
+			        	here.layers.tours.clearLayers();
 			         	L.geoJson(data, {}).addTo(here.layers.tours);
 			        }
 			    });
-
+	    	}
+	    	this.hideTour = function(){
+	    		this.layers.tours.clearLayers();
 	    	}
 		}
 		// Load data
