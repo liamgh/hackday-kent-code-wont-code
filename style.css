@@ -196,3 +196,32 @@ span.distance {
 	font-size: 0.8em;
 }
 
+.result-options {
+	position: relative;
+}
+
+.route {
+margin-top: 1em;	
+position: absolute;
+top: -1em; 
+left: 10em;
+}
+
+
+
+.poi {
+
+background: #323232;
+color: #fff;
+padding: 0.5em;
+}
+
+
+.poi h3 {
+	font-size: 1.5em
+}
+
+
+
+
+
