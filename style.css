@@ -136,6 +136,7 @@ ul.link-list li a i.ico {
  top: -1em;
  color: #fff;
  font-size: 1.7em;
+ min-width: 12em;
 }
 
 .app-heading h1 span {
@@ -151,6 +152,34 @@ margin-bottom: 1.1em;
 }
 
 
+
+header.kent-branding.section {
+margin-bottom: 0.5em;
+padding
+}
+
+
 header.kent-branding img {
  float: right; 
 }
+
+
+header.kent-branding.section img {
+ float: left;
+ width: 10em;
+
+
+}
+
+.section-header {
+	clear: both;
+	background: #081d45;
+	color: #fff;
+	padding: 0.8em;
+	text-transform: uppercase;
+	font-family: times;
+	font-size: 1em;
+
+}
+
+
