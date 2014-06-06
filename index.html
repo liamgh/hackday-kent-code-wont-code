@@ -197,6 +197,13 @@ Video
 				zoom: 16,
 				maxBounds: new L.LatLngBounds(new L.LatLng(90, -200), new L.LatLng(-90, 200))
 			});
+
+			this.user_location_marker = L.circle([51.29225, 1.06599], 500, {
+				color: 'red',
+				fillColor: '#f03',
+				fillOpacity: 0.5
+			});
+
 			// Add layers
 			this.layers = {
 				'poi': new L.LayerGroup().addTo(this.map),
@@ -211,7 +218,8 @@ Video
 
 			// On error, send em somewhere else
 			this.map.on('locationerror', function() {
-	        	map.panTo([51.29225, 1.06599]);         
+	        	here.map.panTo([51.29225, 1.06599]);
+	        	here.map.removeLayer( here.user_location_marker );
 	    	});
 
 			// Load in GeoJson data
@@ -249,11 +257,19 @@ Video
 	    	}
 	    	// on location update (i think)
 			this.map.on('locationfound', function(location) {
-				console.log("Location update: " + location);
+				console.log("Location updated");
+				here.update_location(location);
 	        	here.update_distances(location, here.data);
 	        	// update DOM with reordered lists
 	        	here.renderNearBy(here.data);
 	    	});
+
+	    	this.update_location = function (user_latlng) {
+				here.user_location_marker.setLatLng(user_latlng.latlng);
+				here.user_location_marker.setRadius( user_latlng.accuracy );
+				here.user_location_marker.addTo(here.map);
+	    		
+	    	}
 
 	    	this.update_distances = function(user_latlng, data){
 
@@ -276,7 +292,7 @@ Video
 	    	this.renderNearBy = function(data){
 	    		$('#nearby-locations').empty();
 	    		for (var i = 0; i < data.features.length; i++) {
-	    			var feature = data.features[i]; console.log(feature);
+	    			var feature = data.features[i];
 	    			$('#nearby-locations').append(
 	    				'<li><a href="https://www.kent.ac.uk/student/my-study/">' + feature.properties.name + ' <span class="distance">' + math.round(feature._distance * 1000, 0) + ' metres</span> <i class="ico icon-chevron-right"></i></a></li>'
 	    			);
