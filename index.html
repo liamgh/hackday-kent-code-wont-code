@@ -97,7 +97,7 @@
 
 		<div class="result-options">
 			<h2>Nearby you:</h2>
-			<a class="route" href="#">Give me a guided route</a>
+			<a class="route" href="#" id='show_tour'>Give me a guided route</a>
 		</div>
 
 
@@ -145,16 +145,33 @@
 					<h2>Templeman Library</h2>
 
 					
-					<i class="ico close icon-remove"></i>
+					<i class="close-icon ico icon-remove"></i>
 
-					<p>The hearbeat of the campus. Our new redevelopment...</p>
 
-					<h3><i class="ico icon-chevron-right"></i> Listen</h3>
-Audio file play here
 
-					<h3><i class="ico icon-chevron-right"></i> See</h3>
+<div >
+<img src="images/templeman.jpg" class="poi-img" />
 
-Video
+<p>The hearbeat of the campus. Our new redevelopment...</p>
+
+<p>Fusce a velit eros. Mauris ut mollis nisi. Nam ullamcorper nunc sodales dui dapibus feugiat. Nam tristique elementum massa, quis facilisis nibh.</p>
+
+</div>
+
+<div class="clear"></div>
+
+<h3><i class="ico icon-play"></i> Listen</h3>
+
+
+
+
+<iframe width="33%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/153088444&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+
+
+
+					<h3><i class="ico icon-eye-open"></i> See</h3>
+
+Video and images
 
 				</div>
 
@@ -294,16 +311,33 @@ Video
 	    		for (var i = 0; i < data.features.length; i++) {
 	    			var feature = data.features[i];
 	    			$('#nearby-locations').append(
-	    				'<li><a href="https://www.kent.ac.uk/student/my-study/">' + feature.properties.name + ' <span class="distance">' + math.round(feature._distance * 1000, 0) + ' metres</span> <i class="ico icon-chevron-right"></i></a></li>'
+	    				'<li><a href="#">' + feature.properties.name + ' <span class="distance">' + math.round(feature._distance * 1000, 0) + ' metres</span> <i class="ico icon-chevron-right"></i></a></li>'
 	    			);
 	    		};
+	    	}
+
+	    	this.showTour= function (tour_name){
+	    		$.ajax({
+			        type: 'GET',
+			        url: "tours/"+tour_name+".json",
+			        contentType: "application/json",
+			        success: function(data){
+			        	here.layers.tours.clearLayers();
+			         	L.geoJson(data, {}).addTo(here.layers.tours);
+			        }
+			    });
+	    	}
+	    	this.hideTour = function(){
+	    		this.layers.tours.clearLayers();
 	    	}
 		}
 		// Load data
 		tourMap.load();
 		
 
-
+		$("#show_tour").click(function(){
+			tourMap.showTour("central");
+		});
 		
 
 		// http://stackoverflow.com/questions/27928/how-do-i-calculate-distance-between-two-latitude-longitude-points

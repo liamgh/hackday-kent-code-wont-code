@@ -217,11 +217,28 @@ padding: 0.5em;
 }
 
 
-.poi h3 {
-	font-size: 1.5em
+.poi .col-12-sm {
+	position: relative;
 }
 
 
+.poi h3 {
+	font-size: 1.5em;
+	position: relative;
+}
 
 
+.poi-img {
+	float: left; margin-right: 1em; width: 33%
+}
 
+.close-icon {
+	position: absolute;
+	top:0em;
+	right: 1em;
+}
+
+
+.clear {
+	clear: both;
+}
