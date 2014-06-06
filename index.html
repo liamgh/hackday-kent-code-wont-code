@@ -292,7 +292,7 @@ Video
 	    	this.showTour= function (tour_name){
 	    		$.ajax({
 			        type: 'GET',
-			        url: tour_name+".json",
+			        url: "tours/"+tour_name+".json",
 			        contentType: "application/json",
 			        success: function(data){
 			        	here.layers.tours.clearLayers();
@@ -309,7 +309,7 @@ Video
 		
 
 		$("#show_tour").click(function(){
-			tourMap.showTour("central_tour");
+			tourMap.showTour("central");
 		});
 		
 
