@@ -202,7 +202,7 @@
 	    	}
 	    	// on location update (i think)
 			this.map.on('locationfound', function(location) {
-				console.log("Location update");
+				console.log("Location update: " + location);
 	        	here.update_distances(location, here.data);
 	        	// update DOM with reordered lists
 	        	here.renderNearBy(here.data);
