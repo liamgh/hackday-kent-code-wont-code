@@ -117,10 +117,8 @@
 			
 
 
-			<ul class="link-list key-links">
-					<li><a href="https://www.kent.ac.uk/student/my-study/" class="ico-timetable">Templeman Library <span class="distance">120 metres</span> <i class="ico icon-chevron-right"></i></a></li>
-					<li><a href="#" class="ico-timetable">Gulbenkian  <span class="distance">120 metres</span> <i class="ico icon-chevron-right"></i></a></li>
-					<li><a href="#" class="ico-timetable">Colyer Fergusson  <span class="distance">10 metres</span> <i class="ico icon-chevron-right"></i></a></li>
+			<ul id="nearby-locations" class="link-list key-links">
+					<li><a href="#" class="ico-timetable">Loading <span class="distance">...</span> <i class="ico icon-chevron-right"></i></a></li>
 			</ul>
 
 </div>
@@ -184,9 +182,11 @@ Video
 
 
 	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/jquery/jquery.min.js"></script>
+	<script src="math.js"></script>
 	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet/dist/leaflet.js"></script>
 	<script src="http://www.kent.ac.uk/internationalmaps/bower_components/leaflet-awesome-markers/dist/leaflet.awesome-markers.js"></script>
 	<script>
+		math = mathjs();
 
 		var tourMap = new function(){
 
@@ -255,7 +255,7 @@ Video
 	    	}
 	    	// on location update (i think)
 			this.map.on('locationfound', function(location) {
-				console.log("Location update");
+				console.log("Location update: " + location);
 	        	here.update_distances(location, here.data);
 	        	// update DOM with reordered lists
 	        	here.renderNearBy(here.data);
@@ -273,10 +273,20 @@ Video
 	    				feature.geometry.coordinates[1]
 	    			);
 	    		}
+
+	    		data.features.sort(function(a, b){
+	    			return a._distance > b._distance ? 1 : -1;
+	    		});
 	    	}
 
 	    	this.renderNearBy = function(data){
-	    		// render top 3 or so items
+	    		$('#nearby-locations').empty();
+	    		for (var i = 0; i < data.features.length; i++) {
+	    			var feature = data.features[i]; console.log(feature);
+	    			$('#nearby-locations').append(
+	    				'<li><a href="https://www.kent.ac.uk/student/my-study/">' + feature.properties.name + ' <span class="distance">' + math.round(feature._distance * 1000, 0) + ' metres</span> <i class="ico icon-chevron-right"></i></a></li>'
+	    			);
+	    		};
 	    	}
 		}
 		// Load data
